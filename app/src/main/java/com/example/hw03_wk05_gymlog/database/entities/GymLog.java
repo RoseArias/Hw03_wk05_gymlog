@@ -88,12 +88,10 @@ public class GymLog {
 
   @Override
   public String toString() {
-    return "GymLog{" +
-        "id=" + id +
-        ", exercise='" + exercise + '\'' +
-        ", weight=" + weight +
-        ", reps=" + reps +
-        ", date=" + date +
-        '}';
+    return exercise + '\n' +
+        "weight:" + weight + '\n' +
+        "reps:" + reps + '\n' +
+        "date:" + date.toString() + '\n' +
+        "=-=-=-=-=-=-=\n";
   }
 }
