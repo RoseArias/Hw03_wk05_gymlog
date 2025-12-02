@@ -40,11 +40,14 @@ public class LoginActivity extends AppCompatActivity {
   }
 
   private void verifyUser() {
+
     String username = binding.userNameLoginEditText.getText().toString();
+
     if (username.isEmpty()) {
       toastMaker("Username may not be blank");
       return;
     }
+
     LiveData<User> userObserver = repository.getUserByUserName(username);
     userObserver.observe(this, user -> {
       if (user != null) {
@@ -53,9 +56,8 @@ public class LoginActivity extends AppCompatActivity {
           SharedPreferences sharedPreferences = getApplicationContext()
               .getSharedPreferences(MainActivity.SHARED_PREFERENCE_USER_ID_KEY,
                   Context.MODE_PRIVATE);
-
           SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-          sharedPrefEditor.putInt(MainActivity.SHARED_PREFERENCE_USER_ID_KEY, user.getId());
+          sharedPrefEditor.putInt(MainActivity.SHARED_PREFERENCE_USER_ID_KEY,user.getId());
           sharedPrefEditor.apply();
           startActivity(
               MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
@@ -63,9 +65,6 @@ public class LoginActivity extends AppCompatActivity {
           toastMaker("Invalid password");
           binding.passwordLoginEditText.setSelection(0);
         }
-      } else {
-        toastMaker(String.format("%s is not a valid username.", username));
-        binding.userNameLoginEditText.setSelection(0);
       }
     });
   }
