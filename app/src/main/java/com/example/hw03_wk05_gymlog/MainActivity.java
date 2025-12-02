@@ -2,6 +2,7 @@ package com.example.hw03_wk05_gymlog;
 
 import android.os.Bundle;
 
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,17 +28,22 @@ public class MainActivity extends AppCompatActivity {
     binding = ActivityMainBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
 
+    binding.logDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
+
     binding.logButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
+        getInformationFromDisplay();
         updateDisplay();
       }
     });
   }
 
   private void updateDisplay() {
-    String currentInfo = binding.logDisplayTextView.toString();
-    String newDisplay = String.format(Locale.ENGLISH,mExercise,mWeight,mReps);
+    String currentInfo = binding.logDisplayTextView.getText().toString();
+    String newDisplay = String.format(Locale.ENGLISH, "Exercise:%s%nWeight:%.2f%nReps:%d%n=-=-=-=%n%s",mExercise,mWeight,mReps,currentInfo);
+
+    binding.logDisplayTextView.setText(newDisplay);
   }
 
   private void getInformationFromDisplay() {
