@@ -1,5 +1,6 @@
 package com.example.hw03_wk05_gymlog.database.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import com.example.hw03_wk05_gymlog.database.GymLogDatabase;
@@ -22,6 +23,7 @@ public class GymLog {
   private double weight;
   private int reps;
   private LocalDateTime date;
+  private int userID;
 
   public int getId() {
     return id;
@@ -63,11 +65,20 @@ public class GymLog {
     this.date = date;
   }
 
-  public GymLog(String exercise, double weight, int reps) {
+  public GymLog(String exercise, double weight, int reps, int userID) {
     this.exercise = exercise;
     this.weight = weight;
     this.reps = reps;
+    this.userID = userID;
     date = LocalDateTime.now();
+  }
+
+  public int getUserID() {
+    return userID;
+  }
+
+  public void setUserID(int userID) {
+    this.userID = userID;
   }
 
   @Override
@@ -77,15 +88,16 @@ public class GymLog {
     }
     GymLog gymLog = (GymLog) o;
     return id == gymLog.id && Double.compare(weight, gymLog.weight) == 0
-        && reps == gymLog.reps && Objects.equals(exercise, gymLog.exercise)
-        && Objects.equals(date, gymLog.date);
+        && reps == gymLog.reps && userID == gymLog.userID && Objects.equals(exercise,
+        gymLog.exercise) && Objects.equals(date, gymLog.date);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, exercise, weight, reps, date);
+    return Objects.hash(id, exercise, weight, reps, date, userID);
   }
 
+  @NonNull
   @Override
   public String toString() {
     return exercise + '\n' +

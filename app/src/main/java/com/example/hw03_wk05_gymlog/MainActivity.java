@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
   double mWeight = 0.0;
   int mReps = 0;
 
+  //TODO: Add login information.
+  int loggedInUserId = -1;
+
 
   private ActivityMainBinding binding;
   private GymLogRepository repository;
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     if(mExercise.isEmpty()){
       return;
     }
-    GymLog log = new GymLog(mExercise,mWeight,mReps);
+    GymLog log = new GymLog(mExercise,mWeight,mReps,loggedInUserId);
     repository.insertGymLog(log);
 
   }
