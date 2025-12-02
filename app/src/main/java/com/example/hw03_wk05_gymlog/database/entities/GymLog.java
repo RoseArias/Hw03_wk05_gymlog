@@ -4,6 +4,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import com.example.hw03_wk05_gymlog.database.GymLogDatabase;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
 * Name: Rose Arias-Aceves
@@ -67,5 +68,32 @@ public class GymLog {
     this.weight = weight;
     this.reps = reps;
     date = LocalDateTime.now();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    GymLog gymLog = (GymLog) o;
+    return id == gymLog.id && Double.compare(weight, gymLog.weight) == 0
+        && reps == gymLog.reps && Objects.equals(exercise, gymLog.exercise)
+        && Objects.equals(date, gymLog.date);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, exercise, weight, reps, date);
+  }
+
+  @Override
+  public String toString() {
+    return "GymLog{" +
+        "id=" + id +
+        ", exercise='" + exercise + '\'' +
+        ", weight=" + weight +
+        ", reps=" + reps +
+        ", date=" + date +
+        '}';
   }
 }
