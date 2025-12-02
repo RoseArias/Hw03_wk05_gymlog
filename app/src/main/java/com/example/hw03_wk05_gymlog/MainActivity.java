@@ -1,5 +1,7 @@
 package com.example.hw03_wk05_gymlog;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.text.method.ScrollingMovementMethod;
@@ -18,6 +20,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
   public static final String TAG = "DAC_GYMLOG";
+  private static final String MAIN_ACTIVITY_USER_ID = "com.example.hw03_wk05_gymlog.MAIN_ACTIVITY_USER_ID";
   String mExercise = "";
   double mWeight = 0.0;
   int mReps = 0;
@@ -35,12 +38,19 @@ public class MainActivity extends AppCompatActivity {
     binding = ActivityMainBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
 
-    repository = GymLogRepository.getRepository(getApplication());
+    loginUser();
 
+    if(loggedInUserId == -1){
+      Intent intent = LoginActivity.logIntentFactory(getApplicationContext());
+      startActivity(intent);
+    }
+
+
+    repository = GymLogRepository.getRepository(getApplication());
     binding.logDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
     updateDisplay();
-    binding.logButton.setOnClickListener(new OnClickListener() {
+    binding.loginButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
         getInformationFromDisplay();
@@ -48,6 +58,20 @@ public class MainActivity extends AppCompatActivity {
         updateDisplay();
       }
     });
+  }
+
+
+
+  private void loginUser() {
+    //TODO: create login method
+    loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID,-1);
+
+  }
+
+  static Intent mainActivityIntentFactory(Context context,int userId){
+    Intent intent = new Intent(context, MainActivity.class);
+    intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
+    return intent;
   }
 
   private void insertGymlogRecord(){
