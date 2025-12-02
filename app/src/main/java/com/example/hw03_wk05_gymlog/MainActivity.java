@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hw03_wk05_gymlog.database.GymLogRepository;
+import com.example.hw03_wk05_gymlog.database.entities.GymLog;
 import com.example.hw03_wk05_gymlog.databinding.ActivityMainBinding;
 import java.util.Locale;
 
@@ -20,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
   int mReps = 0;
 
 
-  ActivityMainBinding binding;
+  private ActivityMainBinding binding;
+  private GymLogRepository repository;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +31,26 @@ public class MainActivity extends AppCompatActivity {
     binding = ActivityMainBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
 
+    repository = new GymLogRepository(getApplication());
+
     binding.logDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
     binding.logButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
         getInformationFromDisplay();
+        insertGymlogRecord();
         updateDisplay();
       }
     });
   }
+
+  private void insertGymlogRecord(){
+    GymLog log = new GymLog(mExercise,mWeight,mReps);
+    repository.insertGymLog(log);
+
+  }
+
 
   private void updateDisplay() {
     String currentInfo = binding.logDisplayTextView.getText().toString();

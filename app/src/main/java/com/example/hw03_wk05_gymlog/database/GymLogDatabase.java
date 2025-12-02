@@ -1,13 +1,15 @@
-package com.example.hw03_wk05_gymlog.Database;
+package com.example.hw03_wk05_gymlog.database;
 
 import android.content.Context;
 import android.util.Log;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-import com.example.hw03_wk05_gymlog.Database.entities.GymLog;
+import com.example.hw03_wk05_gymlog.database.entities.GymLog;
 import com.example.hw03_wk05_gymlog.MainActivity;
+import com.example.hw03_wk05_gymlog.database.typeConverters.LocalDateTypeConverter;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 * Date: 12/1/25
 * Explanation: What is this class?
 */
-
+@TypeConverters(LocalDateTypeConverter.class)
 @Database(entities = {GymLog.class}, version = 1, exportSchema = false)
 public abstract class GymLogDatabase extends RoomDatabase {
 

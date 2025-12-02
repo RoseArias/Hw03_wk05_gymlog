@@ -1,8 +1,8 @@
-package com.example.hw03_wk05_gymlog.Database;
+package com.example.hw03_wk05_gymlog.database;
 
 import android.app.Application;
 import android.util.Log;
-import com.example.hw03_wk05_gymlog.Database.entities.GymLog;
+import com.example.hw03_wk05_gymlog.database.entities.GymLog;
 import com.example.hw03_wk05_gymlog.MainActivity;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
@@ -21,7 +21,7 @@ public class GymLogRepository {
   public GymLogRepository(Application application){
     GymLogDatabase db = GymLogDatabase.getDatabase(application);
     this.gymLogDAO = db.gymLogDAO();
-    this.allLogs = this.gymLogDAO.getAllRecords();
+    this.allLogs = (ArrayList<GymLog>) this.gymLogDAO.getAllRecords();
   }
 
   public ArrayList<GymLog> getAllLogs(){
@@ -29,10 +29,9 @@ public class GymLogRepository {
         new Callable<ArrayList<GymLog>>() {
           @Override
           public ArrayList<GymLog> call() throws Exception {
-            return gymLogDAO.getAllRecords();
+            return (ArrayList<GymLog>) gymLogDAO.getAllRecords();
           }
-        }
-    );
+        });
     try{
       return future.get();
     }catch (InterruptedException | ExecutionException e){
