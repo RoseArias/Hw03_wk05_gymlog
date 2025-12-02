@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hw03_wk05_gymlog.database.GymLogRepository;
 import com.example.hw03_wk05_gymlog.database.entities.GymLog;
+import com.example.hw03_wk05_gymlog.database.entities.User;
 import com.example.hw03_wk05_gymlog.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
   private ActivityMainBinding binding;
   private GymLogRepository repository;
 
+  private User user;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     setContentView(binding.getRoot());
 
     loginUser();
+    invalidateOptionsMenu();
 
     if(loggedInUserId == -1){
       Intent intent = LoginActivity.logIntentFactory(getApplicationContext());
