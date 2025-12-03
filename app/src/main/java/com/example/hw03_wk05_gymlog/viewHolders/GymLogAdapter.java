@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.ListAdapter;
 import com.example.hw03_wk05_gymlog.database.entities.GymLog;
 
 /**
- * Name: Rose Arias-Aceves Date: 12/2/25 Explanation: What is this class?
+ * Name: Rose Arias-Aceves
+ * Date: 12/2/25 Explanation: This class sets up the gymlog recycler
  */
 public class GymLogAdapter extends ListAdapter<GymLog, GymLogViewHolder> {
 

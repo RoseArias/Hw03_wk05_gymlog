@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 /**
 * Name: Rose Arias-Aceves
 * Date: 12/1/25
-* Explanation: What is this class?
+* Explanation: GymLogRepository handles writing and calls on the databases
 */
 public class GymLogRepository {
   private GymLogDAO gymLogDAO;
