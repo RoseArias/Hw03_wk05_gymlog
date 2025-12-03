@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 /**
 * Name: Rose Arias-Aceves
 * Date: 12/1/25
-* Explanation: What is this class?
+* Explanation: GymLogRepository handles writing and calls on the databases
 */
 public class GymLogRepository {
   private GymLogDAO gymLogDAO;
@@ -89,6 +89,10 @@ public class GymLogRepository {
     return userDAO.getUserByUserId(userId);
   }
 
+  public LiveData<List<GymLog>> getAllLogsByUserIdLiveData(int loggedInUserId){
+    return gymLogDAO.getRecordsbyUserIdLiveData(loggedInUserId);
+  }
+  @Deprecated
   public ArrayList<GymLog> getAllLogsByUserId(int loggedInUserId) {
     Future<ArrayList<GymLog>> future = GymLogDatabase.databaseWriteExecutor.submit(
         new Callable<ArrayList<GymLog>>() {

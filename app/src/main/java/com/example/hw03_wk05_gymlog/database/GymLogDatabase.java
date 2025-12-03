@@ -16,7 +16,8 @@ import java.util.concurrent.Executors;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Name: Rose Arias-Aceves Date: 12/1/25 Explanation: What is this class?
+ * Name: Rose Arias-Aceves Date: 12/1/25
+ * This class gets access to the database and initializes 2 base users.
  */
 @TypeConverters(LocalDateTypeConverter.class)
 @Database(entities = {GymLog.class, User.class}, version = 4, exportSchema = false)

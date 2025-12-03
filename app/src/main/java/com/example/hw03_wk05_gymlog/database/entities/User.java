@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
 * Name: Rose Arias-Aceves
 * Date: 12/1/25
-* Explanation: What is this class?
+* Explanation: This is the base class with all the fields required for the database USER_TABLE
 */
 
 @Entity(tableName = GymLogDatabase.USER_TABLE)
